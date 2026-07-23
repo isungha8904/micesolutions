@@ -2,7 +2,7 @@
  * OrderQuoteForm - 발주 및 견적 요청 폼
  * -------------------------------------------------------------
  * 상품 상세 모달 하단의 발주 폼. (PRD 7.3)
- *  - 패키지 옵션(단품 vs 언컴패키지) 선택
+ *  - 패키지 옵션(단품 vs 웰컴패키지) 선택
  *  - 수량 입력(최소 발주 수량 이상)
  *  - 단일 배송지 입력 (다중 배송은 Phase 2 — 아래 주석 참고)
  *  - [비교견적서 자동생성] : 견적 요약을 즉석에서 만들어 보여줌(목)
@@ -36,13 +36,13 @@ export default function OrderQuoteForm({ product, project, onDone }: OrderQuoteF
   const [address, setAddress] = useState<string>("");
   const [showQuote, setShowQuote] = useState<boolean>(false); // 견적서 노출 여부
 
-  // 언컴패키지(턴키) 선택 시 개당 3,000원 브랜딩/포장 비용을 더한다(데모 규칙).
+  // 웰컴패키지(턴키) 선택 시 개당 3,000원 브랜딩/포장 비용을 더한다(데모 규칙).
   const packageFeePerUnit = packageOption === "turnkey" ? 3000 : 0;
   const totalAmount = (product.price + packageFeePerUnit) * quantity;
 
   // 발주 처리: 스토어에 지출 반영 후 완료 안내
   const handleOrder = () => {
-    const label = `${product.name} ${quantity}개${packageOption === "turnkey" ? " (언컴패키지)" : ""}`;
+    const label = `${product.name} ${quantity}개${packageOption === "turnkey" ? " (웰컴패키지)" : ""}`;
     requestOrder(project.id, label, totalAmount);
     alert(`발주·견적 요청이 접수되었습니다.\n\n${label}\n합계 ${formatWon(totalAmount)}\n\n(데모: 실제 결제/발송은 이뤄지지 않습니다.)`);
     onDone();
@@ -63,7 +63,7 @@ export default function OrderQuoteForm({ product, project, onDone }: OrderQuoteF
           <OptionButton
             active={packageOption === "turnkey"}
             onClick={() => product.canPackage && setPackageOption("turnkey")}
-            title="언컴패키지"
+            title="웰컴패키지"
             desc={product.canPackage ? "브랜딩 박스 +개당 3,000원" : "이 상품은 불가"}
             disabled={!product.canPackage}
           />
@@ -111,7 +111,7 @@ export default function OrderQuoteForm({ product, project, onDone }: OrderQuoteF
           <Row label="상품" value={product.name} />
           <Row label="단가" value={formatWon(product.price)} />
           {packageFeePerUnit > 0 && (
-            <Row label="언컴패키지" value={`+${formatWon(packageFeePerUnit)}/개`} />
+            <Row label="웰컴패키지" value={`+${formatWon(packageFeePerUnit)}/개`} />
           )}
           <Row label="수량" value={`${quantity}개`} />
           <div className="my-2 border-t border-line" />

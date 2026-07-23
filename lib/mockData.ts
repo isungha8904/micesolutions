@@ -253,7 +253,7 @@ export const initialUserState: UserState = {
 /** 초기 지출 내역 (예산 장부 데모용) - 실제 상품명 기반 */
 export const initialSpending: SpendingEntry[] = [
   { id: "s1", projectId: "p1", label: "반가사유상 미니어처 20개", amount: 1300000, date: "2026-06-12" },
-  { id: "s2", projectId: "p1", label: "언컴패키지 브랜딩 박스", amount: 450000, date: "2026-06-20" },
+  { id: "s2", projectId: "p1", label: "웰컴패키지 브랜딩 박스", amount: 450000, date: "2026-06-20" },
   { id: "s3", projectId: "p2", label: "곤룡포 비치타월 + 브랜딩", amount: 500000, date: "2026-07-01" },
   { id: "s4", projectId: "p2", label: "대동여지도 노트 300개", amount: 300000, date: "2026-07-10" },
 ];

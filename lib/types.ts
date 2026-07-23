@@ -23,7 +23,7 @@ export interface Product {
   regionTag: string | null; // 지역 연고 (로컬 핏)
   image_url: string; // 이미지 경로 (/products/xxx.jpg 또는 Unsplash 폴백)
   isPremium: boolean; // VIP(Pro 전용) 상품 여부 → 홈 피드에서 blur 처리
-  canPackage: boolean; // 턴키 언컴패키지 가능 여부
+  canPackage: boolean; // 턴키 웰컴패키지 가능 여부
   esgScore: number; // 친환경 절감 기여 수치
   koreanCulturalTags: string[]; // 한국 문화 요소 (한국 핏)
   isTraditionalCraft: boolean; // 전통 공예 여부 (한국 핏 가산점)
