@@ -67,6 +67,20 @@ export function shouldShowKoreanFit(project: Project): boolean {
 }
 
 /**
+ * 종합 핏 점수 - 목록 정렬 기준
+ * -------------------------------------------------------------
+ * 홈 피드를 "가장 잘 맞는 상품"부터 보여주기 위한 정렬용 종합 점수.
+ * - 로컬 핏 + (한국 핏 노출 대상일 때만) 한국 핏 을 더한다.
+ * - 국내(domestic) 프로젝트에서는 한국 핏이 의미 없으므로 로컬 핏만 반영한다.
+ * → 참가자 구성에 따라 정렬 결과가 자연스럽게 달라진다.
+ */
+export function getCombinedFitScore(product: Product, project: Project): number {
+  const local = getLocalFitScore(product, project);
+  const korean = shouldShowKoreanFit(project) ? getKoreanFitScore(product, project) : 0;
+  return local + korean;
+}
+
+/**
  * 로컬 핏 점수 근거를 한 줄 설명으로 만들어 반환한다. (스토리텔링용)
  * - "왜 이 점수인가"를 사용자 입력 기준으로 풀어서 보여준다.
  */

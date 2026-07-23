@@ -60,3 +60,9 @@ export interface SpendingEntry {
   amount: number; // 금액(원)
   date: string; // 지출일 (YYYY-MM-DD)
 }
+
+/** 장바구니 항목 1건 ("직접 담기" 주문 모드용) */
+export interface CartItem {
+  productId: string; // 담은 상품 id
+  quantity: number; // 수량 (기본값은 상품 최소 발주 수량 moq)
+}

@@ -36,9 +36,12 @@ interface ProductDetailModalProps {
 export default function ProductDetailModal({ product, project, onClose }: ProductDetailModalProps) {
   const remainingTickets = useAppStore((s) => s.remainingTickets);
   const useTicket = useAppStore((s) => s.useTicket);
+  const addToCart = useAppStore((s) => s.addToCart);
 
   // 티켓 사용 결과 안내 메시지 (모달 내 인라인 피드백)
   const [ticketMsg, setTicketMsg] = useState<string>("");
+  // 장바구니 담기 안내 메시지
+  const [cartMsg, setCartMsg] = useState<string>("");
 
   // product 가 없으면 렌더링하지 않음
   if (!product) return null;
@@ -56,6 +59,12 @@ export default function ProductDetailModal({ product, project, onClose }: Produc
     } else {
       setTicketMsg("보유한 샘플 티켓을 모두 사용했어요.");
     }
+  };
+
+  // 장바구니 담기 처리 (기본 수량 = 최소 발주 수량)
+  const handleAddToCart = () => {
+    addToCart(product.id, product.moq);
+    setCartMsg(`장바구니에 담았어요 (${product.moq}개). 계속 담거나 하단에서 주문하세요.`);
   };
 
   return (
@@ -94,6 +103,14 @@ export default function ProductDetailModal({ product, project, onClose }: Produc
           🎫 티켓 사용해 샘플 받기 (잔여 {remainingTickets}장)
         </Button>
         {ticketMsg && <p className="mt-2 text-center text-xs font-medium text-accent">{ticketMsg}</p>}
+      </div>
+
+      {/* 장바구니 담기 버튼 (직접 담기 주문 모드) */}
+      <div className="mb-4">
+        <Button variant="outline" fullWidth onClick={handleAddToCart}>
+          🛒 장바구니에 담기
+        </Button>
+        {cartMsg && <p className="mt-2 text-center text-xs font-medium text-good">{cartMsg}</p>}
       </div>
 
       {/* 스토리텔링 (왜 이 점수인가) */}

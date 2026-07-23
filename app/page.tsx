@@ -6,14 +6,15 @@
  */
 import AppHeader from "@/components/layout/AppHeader";
 import ProjectSelector from "@/components/feed/ProjectSelector";
-import ProductGrid from "@/components/feed/ProductGrid";
+import FeedView from "@/components/feed/FeedView";
 
 export default function HomePage() {
   return (
     <>
       <AppHeader title="GiftCue" showMembership />
       <ProjectSelector />
-      <ProductGrid />
+      {/* 주문 방식(직접 담기/자동 큐레이션) + 정렬 필터 + 상품 목록 */}
+      <FeedView />
     </>
   );
 }
