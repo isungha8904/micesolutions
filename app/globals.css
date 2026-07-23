@@ -1,0 +1,43 @@
+/*
+ * 전역 스타일 (Tailwind + KREAM 톤 베이스)
+ * -------------------------------------------------------------
+ * - Pretendard 폰트를 CDN 으로 불러오되, 실패해도 tailwind.config 의
+ *   시스템 한글 폰트로 폴백되므로 데모가 깨지지 않는다.
+ * - 앱 전체를 모바일 우선(최대 430px) 화이트 캔버스로 잡는다.
+ */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    /* KREAM 특유의 밝은 회색 배경 위에 흰색 앱 카드를 얹는 느낌 */
+    background-color: #f4f4f4;
+    color: theme("colors.ink");
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 모바일 우선 앱 셸: 데스크톱에서도 가운데 폰 폭으로 고정 */
+  .app-shell {
+    @apply mx-auto flex min-h-screen w-full max-w-app flex-col bg-canvas;
+  }
+
+  /* 하단 탭 바 높이만큼 본문 하단 여백 확보 (콘텐츠가 탭에 가리지 않도록) */
+  .app-main {
+    @apply flex-1 pb-24;
+  }
+}
+
+@layer utilities {
+  /* 가로 스크롤 숨김 (칩/탭 가로 스크롤 영역용) */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

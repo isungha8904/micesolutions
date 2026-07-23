@@ -1,0 +1,14 @@
+# 의존성
+/node_modules
+
+# Next.js 빌드 산출물
+/.next
+/out
+
+# 환경 변수 (데모라 실제 사용 안 하지만 관례상 제외)
+.env
+.env.local
+
+# 기타
+.DS_Store
+*.log
